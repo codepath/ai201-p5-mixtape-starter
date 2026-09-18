@@ -20,6 +20,8 @@ instance/
 dist/
 build/
 
+images/
+
 # Environment variables
 .env
 

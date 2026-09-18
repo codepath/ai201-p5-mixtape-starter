@@ -10,7 +10,9 @@ from app import db
 from models import User, Song, ListeningEvent
 
 
-RECENT_THRESHOLD = timedelta(hours=24)
+# "Listening now" means actively listening in the last few minutes, not any time
+# in the last day. A 24h window surfaced friends who listened hours ago.
+RECENT_THRESHOLD = timedelta(minutes=30)
 
 
 def get_friends_listening_now(user_id: str) -> list[dict]:
