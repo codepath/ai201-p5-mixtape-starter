@@ -10,7 +10,7 @@ from app import db
 from models import User, Song, ListeningEvent
 
 
-RECENT_THRESHOLD = timedelta(hours=24)
+RECENT_THRESHOLD = timedelta(hours=0.05)
 
 
 def get_friends_listening_now(user_id: str) -> list[dict]:
@@ -29,8 +29,8 @@ def get_friends_listening_now(user_id: str) -> list[dict]:
     if not user:
         raise ValueError(f"User {user_id} not found")
 
-    cutoff = datetime.now(timezone.utc) - RECENT_THRESHOLD
-    friend_ids = [f.id for f in user.friends]
+    cutoff = datetime.now(timezone.utc) - RECENT_THRESHOLD      # Line 13 says recent_threshold is 24 hours, 
+    friend_ids = [f.id for f in user.friends]                   # people who listened yesterday still "counts as now"
 
     if not friend_ids:
         return []

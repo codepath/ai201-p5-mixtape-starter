@@ -62,8 +62,8 @@ def get_playlist_songs(playlist_id: str) -> list[dict]:
         .order_by(asc(playlist_entries.c.position))
         .all()
     )
-
-    return [song.to_dict() for song in songs[:-1]]
+# bug in the slicing of the list to return the songs, cuts out the most recent song added
+    return [song.to_dict() for song in songs]
 
 
 def get_playlist(playlist_id: str) -> dict:
