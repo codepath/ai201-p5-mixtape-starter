@@ -63,7 +63,7 @@ def get_playlist_songs(playlist_id: str) -> list[dict]:
         .all()
     )
 
-    return [song.to_dict() for song in songs[:-1]]
+    return [song.to_dict() for song in songs]
 
 
 def get_playlist(playlist_id: str) -> dict:
