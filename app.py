@@ -7,6 +7,7 @@ Flask application factory and database setup.
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
+import sys
 
 db = SQLAlchemy()
 
@@ -44,5 +45,13 @@ def create_app(config=None):
 
 
 if __name__ == "__main__":
-    app = create_app()
-    app.run(debug=True)
+    sys.exit(
+        "Mixtape cannot be started with `python app.py`.\n"
+        "\n"
+        "Running app.py directly makes Python load it twice. The routes then get\n"
+        "a database object that was never set up, so every route would fail.\n"
+        "\n"
+        "Start the app from the root of the repo with this command instead:\n"
+        "\n"
+        "    FLASK_APP=app:create_app flask run\n"
+    )
